@@ -5,12 +5,9 @@ public class User {
     String UserPassword;
     String UserEmail;
     int UserPhone;
-    int UserID=0;
-    public static int counter=0;
+    int UserID;
     public User()
     {
-        counter++;
-        this.UserID=counter;
     }
     
 }

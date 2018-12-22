@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 
-public class Delete {
+public class Update {
     User user=new User();
     Item item=new Item();
     Connection Connect = null;
@@ -17,7 +17,7 @@ public class Delete {
     PreparedStatement preparedDStatement = null;
     ResultSet resultSet = null;
     
-    public Delete() 
+    public Update() 
     {
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -39,9 +39,9 @@ public class Delete {
         return conn;
     }
     
-    public void DeletePost(int userID)
+    public void UpdatePost(int userID)
     {  
-        String Query="select * from iteminfo where userid='" + userID+ "'" ;
+          String Query="select * from iteminfo where userid='" + userID+ "'" ;
         boolean Excists = false;
         try {
                 resultSet = statement.executeQuery(Query);
@@ -75,10 +75,20 @@ public class Delete {
         System.out.println("Enter PostID :");
         Scanner ob2=new Scanner(System.in);
         choose=ob2.nextInt();
-         String Queryy = "DELETE FROM iteminfo WHERE id =? ";
+         String Queryy = "UPDATE iteminfo SET category = ? ,color = ? ,location = ? ,dateday = ? ,datemonth = ? ,id = ? ,description = ? ,userid = ? WHERE id = '" + choose+ "'";
+       System.out.println("Enter New Description :");
+        Scanner ob=new Scanner(System.in);
+        Description=ob.nextLine();
         try (Connection conn = this.connect();
             PreparedStatement pstmt = conn.prepareStatement(Queryy)) {
-            pstmt.setInt(1, choose);
+            pstmt.setString(1, item.Category);
+            pstmt.setString(2, item.color);
+            pstmt.setString(3, item.Locationfoundeditem);
+            pstmt.setInt(4, item.Date_day);
+            pstmt.setInt(5, item.Date_month);
+            pstmt.setInt(6, item.Item_ID);
+            pstmt.setString(7, Description);
+            pstmt.setInt(8,item.user_id );
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -86,4 +96,3 @@ public class Delete {
         
    }
 }
-

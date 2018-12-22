@@ -10,7 +10,8 @@ import java.util.Scanner;
 
 
 public class Connect {
-     User user=new User();
+    
+    User user=new User();
     Item item=new Item();
     Connection Connect = null;
     Statement statement = null;
@@ -122,3 +123,8 @@ public class Connect {
     }
     
 }
+
+
+
+    
+
