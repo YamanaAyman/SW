@@ -1,5 +1,6 @@
 
 package honesty;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -21,15 +22,15 @@ public class LogIn {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connect = DriverManager.getConnection("jdbc:mysql://localhost/SW?user=root");
-            //Don't forget the db name
             statement = Connect.createStatement();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
     
-    public void log_in()
+    public int log_in()
     {  
+        int userid;
           String mail,password;
           System.out.println("Enter your  E-mail :");
           Scanner ob1=new Scanner(System.in);
@@ -37,27 +38,26 @@ public class LogIn {
           System.out.println("Enter your  Password :");
           Scanner ob2=new Scanner(System.in);
           password=ob2.next() ;  
-          search(mail ,password);
+          userid=VerifyEmailAndPassword(mail ,password);
+          return userid;
     }
     
-    public void search(String email , String pass)
+    public int VerifyEmailAndPassword(String email , String pass)
     {    
  
     
      
     String Query="select * from userinfo where email='" + email+ "' and password='" + pass+ "'";
     boolean Excists = false;
-  try {
-           // Connect.prepareStatement(Query).executeUpdate();
+    try {
             resultSet = statement.executeQuery(Query);
-            System.out.println("honesty.LogIn.search()");
       while (resultSet.next()){
             user.UserEmail=(resultSet.getString("email"));
             user.UserPassword= (resultSet.getString("password"));
             user.UserName= (resultSet.getString("username"));
             user.UserPhone= (resultSet.getInt("phone"));
             user.UserID= (resultSet.getInt("id"));
-           System.out.println(user.UserName);
+            //System.out.println(user.UserName);
             Excists = true; 
             }    
           
@@ -70,16 +70,7 @@ public class LogIn {
         } else {
             System.out.println(" fail because you should make signup at first ") ;
         }
-      
-      
-      
-      
-      /*if( user.password== pass && user.e_mail==email )
-                System.out.println("Successfully log in");
-            else 
-                System.out.println(" Error log in !! ");
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            }*/ 
+        return user.UserID;
  }
+ 
 }
