@@ -10,7 +10,6 @@ import java.sql.Statement;
 import java.util.Scanner;
 
 public class Delete {
-    User user=new User();
     Item item=new Item();
     Connection Connect = null;
     Statement statement = null;
@@ -28,7 +27,7 @@ public class Delete {
         }
     }
     
-         private Connection connect() {
+      private Connection connect() {
         String url = "jdbc:mysql://localhost/SW?user=root";
         Connection conn = null;
         try {
@@ -69,8 +68,6 @@ public class Delete {
             } else {
                 System.out.println(" No Posts ") ;
             }
- 
-          String Description;
           int choose;
         System.out.println("Enter PostID :");
         Scanner ob2=new Scanner(System.in);
