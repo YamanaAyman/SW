@@ -1,4 +1,3 @@
-
 package honesty;
 
 import java.io.BufferedReader;

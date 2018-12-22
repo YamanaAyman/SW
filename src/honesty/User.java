@@ -6,8 +6,5 @@ public class User {
     String UserEmail;
     int UserPhone;
     int UserID;
-    public User()
-    {
-    }
     
 }
